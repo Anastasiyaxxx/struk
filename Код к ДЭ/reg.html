@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>violations.no</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="style/style.css">
+     <!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(96437380, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/96437380" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(96437380, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/96437380" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<body>
+    <div class="header" style="Background-color: #434343;display: flex;">
+        <img src="img/Background.svg" alt="" style="margin-left: 30px;">
+        <p style="color: #FFFFFF;margin-right: 25px;color: #FFFFFF;margin-left: 25px;font-size: 40px;margin-top: 18px;">Нарушением.<p style="margin-left: -24px;color: #FFFFFF;margin-top: 47px;">нет</p></p>
+        <p style="color: #FFFFFF;margin-top: 36px;color: #FFFFFF;margin-left: 78px;font-size: 25px;">Портал сознательных граждан</p>
+    </div>
+<div>
+   
+<div class="left_column">
+    <div class="menu" style="Background-color: #1F2383;
+    height: 716px;
+    height: 653px;
+    height: 717px;
+    margin-top: 0px;
+    width: 20%;
+    float: left;">
+        
+        <p><a href="regajax.php"style="color: #fff; font-size: 32px; margin-left: 30px;">Регистрация</a></p>
+
+        <p><a href="aut.php" style="color: #fff; font-size: 32px; margin-left: 30px;">Войти</a></p>
+    </div>
+</div>
+ 
+</div>
+
+    <div class="container" style="
+    margin-top: 65px;
+    flex-direction: row;
+    margin-left: 111px;">
+         <div class="container" style="display: flex; justify-content: space-around; position: absolute; ">
+    <form id="ajaxForm">
+    <h1>Регистрация</h1>
+       <p><input class="form-control" style="width: 200px;" type="text" name="FIO" placeholder="Введите имя"></p>
+        <p><input class="form-control" style="width: 200px;"  type="text" name="Login" placeholder="Введите Логин"></p>
+        <p><input class="form-control" style="width: 200px;" type="email" name="Email" placeholder="Введите email"></p>
+        <p><input class="form-control" style="width: 200px;" type="text" name="Password" placeholder="Введите Пароль"></p>
+        <p><input class="form-control" style="width: 200px;" type="text" name="phone" placeholder="Введите номер телефона"></p>
+        <button type="button" id="btnSend" onclick="registration();" value="Регистрация" class="btn btn-outline-dark" value="Регистрация">Регистрация</button>
+
+        <p><a class="btn btn-link" href="aut.php">Войти</a></p>
+        <p><a class="btn btn-link" href="index.php">На главную</a></p>
+     
+    </form>
+ </div>
+   
+    <div class="message"id="message" style="margin-right: 48%;"></div>
+    </div>
+
+    
+    
+    <script>
+        function registration()
+        {
+            let ajaxForm = document.querySelector("#ajaxForm");
+            let message = document.querySelector("#message");
+            let btnSend = message.btnSend;
+            
+            $.ajax({
+                url: "action_reg.php",
+                dateType: "html",
+                method: "POST",
+                data: $("#ajaxForm").serialize(),
+                success: function(otvet){
+                    let result = JSON.parse(otvet);
+                   //message.innerHTML = result.error;
+                   
+                   if(typeof result['FIO'] !== "undefined" && result.FIO != "" )
+                   {
+                       message.innerHTML = `<div class="alert alert-danger" role="alert" style="width: 300px;">${result.FIO}<p></p> ${result.Login}<p></p>${result.Email}<p></p> ${result.Password}<p></p> ${result.phone}<p></p> </div>`;
+                      
+                       ajaxForm.FIO.style.border = "2px solid red";
+                       ajaxForm.Login.style.border = "2px solid red";
+                        ajaxForm.Email.style.border = "2px solid red";
+                         ajaxForm.Password.style.border = "2px solid red";
+                          ajaxForm.phone.style.border = "2px solid red";
+
+                   }
+                   else{
+                       message.innerHTML = "";
+                       ajaxForm.FIO.style.border = "";
+                       ajaxForm.Login.style.border = "";
+                        ajaxForm.Email.style.border = "";
+                         ajaxForm.Password.style.border = "";
+                          ajaxForm.phone.style.border = "";
+                           
+                   }
+                },
+                error: function(){
+                    
+                }
+            });
+        }
+    </script>
+<div class="footer"style="">
+    <div class="header" style="Background-color: #434343;
+    display: flex;
+    width: 100%;
+    clear: both;">
+        <img src="img/Background.svg" alt="" style="margin-left: 30px;">
+        <p style="color: #FFFFFF;margin-right: 25px;color: #FFFFFF;margin-left: 25px;font-size: 40px;margin-top: 18px;">Нарушением.<p style="margin-left: -24px;color: #FFFFFF;margin-top: 47px;">нет</p></p>
+        <p style="color: #FFFFFF;margin-top: 36px;color: #FFFFFF;margin-left: 78px;font-size: 25px;">Портал сознательных граждан</p>
+    </div>
+   <!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(96437380, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/96437380" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</div>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(96437380, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/96437380" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</body>
+</html>
